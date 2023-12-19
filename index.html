@@ -69,38 +69,6 @@
         renderBoard();
       }
 
-      <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const board = document.getElementById('game-board');
-      let tiles = Array(16).fill(0);
-
-      function renderBoard() {
-        board.innerHTML = '';
-        tiles.forEach((value) => {
-          const tile = document.createElement('div');
-          tile.className = 'tile';
-          tile.textContent = value !== 0 ? value : '';
-          board.appendChild(tile);
-        });
-      }
-
-      function getRandomEmptyCell() {
-        const emptyCells = tiles.reduce((acc, value, index) => {
-          if (value === 0) {
-            acc.push(index);
-          }
-          return acc;
-        }, []);
-        return emptyCells[Math.floor(Math.random() * emptyCells.length)];
-      }
-
-      function addRandomTile() {
-        const value = Math.random() < 0.9 ? 2 : 4;
-        const index = getRandomEmptyCell();
-        tiles[index] = value;
-        renderBoard();
-      }
-
       function mergeTiles(startIndex, targetIndex) {
         const startValue = tiles[startIndex];
         const targetValue = tiles[targetIndex];
@@ -137,36 +105,9 @@
             }
           }
         }
-      }
-
-      function handleSwipe(startX, startY, endX, endY) {
-        const deltaX = endX - startX;
-        const deltaY = endY - startY;
-        const threshold = 50;
-
-        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > threshold) {
-          move(deltaX > 0 ? 'right' : 'left');
-        } else if (Math.abs(deltaY) > threshold) {
-          move(deltaY > 0 ? 'down' : 'up');
-        }
 
         addRandomTile();
       }
-
-      function handleTouchStart(event) {
-        touchStartX = event.touches[0].clientX;
-        touchStartY = event.touches[0].clientY;
-      }
-
-      function handleTouchMove(event) {
-        event.preventDefault();
-        const touchMoveX = event.touches[0].clientX;
-        const touchMoveY = event.touches[0].clientY;
-        handleSwipe(touchStartX, touchStartY, touchMoveX, touchMoveY);
-      }
-
-      document.addEventListener('touchstart', handleTouchStart);
-      document.addEventListener('touchmove', handleTouchMove);
 
       addRandomTile();
       addRandomTile();
