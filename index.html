@@ -37,7 +37,6 @@
     document.addEventListener('DOMContentLoaded', function () {
       const board = document.getElementById('game-board');
       let tiles = Array(16).fill(0);
-      let tilesSpawned = 0;
 
       function renderBoard() {
         board.innerHTML = '';
@@ -63,7 +62,6 @@
         const value = Math.random() < 0.9 ? 2 : 4;
         const index = getRandomEmptyCell();
         tiles[index] = value;
-        tilesSpawned++;
         renderBoard();
       }
 
@@ -116,9 +114,7 @@
           move(deltaY > 0 ? 'down' : 'up');
         }
 
-        if (tilesSpawned >= 2) {
-          addRandomTile();
-        }
+        addRandomTile();
       }
 
       function handleTouchStart(event) {
