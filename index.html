@@ -46,12 +46,15 @@
 
       function renderBoard() {
         board.innerHTML = '';
-        tiles.forEach((value) => {
-          const tile = document.createElement('div');
-          tile.className = 'tile';
-          tile.textContent = value !== 0 ? value : '';
-          board.appendChild(tile);
-        });
+        for (let row = 0; row < 4; row++) {
+          for (let col = 0; col < 4; col++) {
+            const currentIndex = row * 4 + col;
+            const tile = document.createElement('div');
+            tile.className = 'tile';
+            tile.textContent = tiles[currentIndex] !== 0 ? tiles[currentIndex] : '';
+            board.appendChild(tile);
+          }
+        }
       }
 
       function getRandomEmptyCell() {
@@ -94,11 +97,13 @@
               }
 
               if (nextCol >= 0 && nextCol < 4) {
-                if (tiles[row * 4 + nextCol] === 0) {
-                  tiles[row * 4 + nextCol] = currentValue;
+                const targetIndex = row * 4 + nextCol;
+
+                if (tiles[targetIndex] === 0) {
+                  tiles[targetIndex] = currentValue;
                   tiles[currentIndex] = 0;
-                } else if (tiles[row * 4 + nextCol] === currentValue) {
-                  mergeTiles(currentIndex, row * 4 + nextCol);
+                } else if (tiles[targetIndex] === currentValue) {
+                  mergeTiles(currentIndex, targetIndex);
                 }
               }
             }
