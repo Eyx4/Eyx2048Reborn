@@ -92,11 +92,13 @@
                 nextCol += direction === 'right' ? 1 : -1;
               }
 
-              if (direction === 'right' ? nextCol < 4 : nextCol >= 0 && tiles[row * 4 + nextCol] === currentValue) {
-                mergeTiles(currentIndex, row * 4 + nextCol);
-              } else {
-                tiles[row * 4 + (direction === 'right' ? nextCol - 1 : nextCol + 1)] = currentValue;
-                tiles[currentIndex] = 0;
+              if (nextCol >= 0 && nextCol < 4) {
+                if (tiles[row * 4 + nextCol] === 0) {
+                  tiles[row * 4 + nextCol] = currentValue;
+                  tiles[currentIndex] = 0;
+                } else if (tiles[row * 4 + nextCol] === currentValue) {
+                  mergeTiles(currentIndex, row * 4 + nextCol);
+                }
               }
             }
           }
