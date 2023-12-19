@@ -79,7 +79,7 @@
 
       function move(direction) {
         for (let row = 0; row < 4; row++) {
-          for (let col = direction === 'right' ? 2 : 1; direction === 'right' ? col >= 0 : col < 4; direction === 'right' ? col-- : col++) {
+          for (let col = direction === 'right' ? 3 : 0; direction === 'right' ? col >= 0 : col < 4; direction === 'right' ? col-- : col++) {
             const currentIndex = row * 4 + col;
             const currentValue = tiles[currentIndex];
 
