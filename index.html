@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2048 Tile Game</title>
+  <title>Eyx4's 2048 Tile Game</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -30,13 +30,14 @@
   </style>
 </head>
 <body>
-  <h1>2048 Tile Game</h1>
+  <h1>Eyx4's 2048 Tile Game</h1>
   <div id="game-board"></div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const board = document.getElementById('game-board');
       let tiles = Array(16).fill(0);
+      let tilesSpawned = 0;
 
       function renderBoard() {
         board.innerHTML = '';
@@ -62,6 +63,7 @@
         const value = Math.random() < 0.9 ? 2 : 4;
         const index = getRandomEmptyCell();
         tiles[index] = value;
+        tilesSpawned++;
         renderBoard();
       }
 
@@ -112,7 +114,10 @@
           move(deltaY > 0 ? 'down' : 'up');
         }
 
-        addRandomTile();
+        if (tilesSpawned >= 2) {
+          // Allow movement only after a certain number of tiles have spawned
+          addRandomTile();
+        }
       }
 
       function handleTouchStart(event) {
