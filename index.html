@@ -32,6 +32,10 @@
 <body>
   <h1>Eyx4's 2048 Tile Game</h1>
   <div id="game-board"></div>
+  <button onclick="move('up')">Up</button>
+  <button onclick="move('down')">Down</button>
+  <button onclick="move('left')">Left</button>
+  <button onclick="move('right')">Right</button>
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -101,36 +105,9 @@
             }
           }
         }
-      }
-
-      function handleSwipe(startX, startY, endX, endY) {
-        const deltaX = endX - startX;
-        const deltaY = endY - startY;
-        const threshold = 50;
-
-        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > threshold) {
-          move(deltaX > 0 ? 'right' : 'left');
-        } else if (Math.abs(deltaY) > threshold) {
-          move(deltaY > 0 ? 'down' : 'up');
-        }
 
         addRandomTile();
       }
-
-      function handleTouchStart(event) {
-        touchStartX = event.touches[0].clientX;
-        touchStartY = event.touches[0].clientY;
-      }
-
-      function handleTouchMove(event) {
-        event.preventDefault();
-        const touchMoveX = event.touches[0].clientX;
-        const touchMoveY = event.touches[0].clientY;
-        handleSwipe(touchStartX, touchStartY, touchMoveX, touchMoveY);
-      }
-
-      document.addEventListener('touchstart', handleTouchStart);
-      document.addEventListener('touchmove', handleTouchMove);
 
       addRandomTile();
       addRandomTile();
