@@ -164,8 +164,9 @@
       addRandomTile();
       renderBoard();
 
-      // Set up event listener for the buttons using event delegation
-      document.getElementById('buttons-container').addEventListener('click', function (event) {
+      // Set up event listeners for the buttons
+      const buttonsContainer = document.getElementById('buttons-container');
+      buttonsContainer.addEventListener('click', function (event) {
         const direction = event.target.dataset.direction;
         if (direction) {
           move(direction);
