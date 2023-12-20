@@ -39,22 +39,6 @@
       transform: translate(-50%, -50%);
     }
 
-    .tile.rotate-2 {
-      transform: rotate(90deg);
-    }
-
-    .tile.rotate-4 {
-      transform: rotate(180deg);
-    }
-
-    .tile.rotate-8 {
-      transform: rotate(270deg);
-    }
-
-    .tile.rotate-16 {
-      transform: rotate(360deg);
-    }
-
     button {
       font-size: 16px;
       margin: 5px;
@@ -92,9 +76,6 @@
           tile.className = 'tile';
           const value = tiles[currentIndex] !== 0 ? tiles[currentIndex] : '';
           tile.innerHTML = `<span>${value}</span>`;
-          if (value !== '') {
-            tile.classList.add(`rotate-${value}`);
-          }
           board.appendChild(tile);
         }
       }
