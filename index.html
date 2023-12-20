@@ -109,6 +109,12 @@
       const value = Math.random() < 0.9 ? 2 : 4;
       const index = getRandomEmptyCell();
       tiles[index] = value;
+      // Update the score
+      score += value;
+      // Update the high score if needed
+      if (score > highScore) {
+        highScore = score;
+      }
     }
 
     function mergeTiles(startIndex, targetIndex) {
