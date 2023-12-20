@@ -46,6 +46,8 @@
     <button onclick="move('down')">Down</button>
     <button onclick="move('left')">Left</button>
     <button onclick="move('right')">Right</button>
+    <!-- Add this reset button -->
+    <button onclick="resetGame()">Reset Game</button>
   </div>
 
   <script>
@@ -158,6 +160,13 @@
         alert("Game Over!");
         // You might want to reset the game or do something else here
       }
+    }
+
+    function resetGame() {
+      tiles.fill(0);
+      addRandomTile();
+      addRandomTile();
+      renderBoard();
     }
 
     document.addEventListener('DOMContentLoaded', function () {
