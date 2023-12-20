@@ -60,8 +60,9 @@
 
     function calculateTileSize(width, height) {
       const tileSize = Math.min(width / 4, height / 4);
+      const fontSize = tileSize / 3;
       document.documentElement.style.setProperty('--tile-size', `${tileSize}px`);
-      document.documentElement.style.setProperty('--font-size', `${tileSize / 3}px`);
+      document.documentElement.style.setProperty('--font-size', `${fontSize}px`);
     }
 
     function renderBoard() {
