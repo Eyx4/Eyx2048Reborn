@@ -134,15 +134,13 @@
 
           if (currentValue !== 0) {
             let nextCol = direction === 'right' ? col + 1 : col - 1;
-            let targetCol = col;
 
             while (direction === 'right' ? nextCol < 4 : nextCol >= 0 && tiles[row * 4 + nextCol] === 0) {
-              targetCol = nextCol;
               nextCol += direction === 'right' ? 1 : -1;
             }
 
-            if (targetCol !== col) {
-              const targetIndex = row * 4 + targetCol;
+            if (nextCol >= 0 && nextCol < 4) {
+              const targetIndex = row * 4 + nextCol;
 
               if (tiles[targetIndex] === 0) {
                 tiles[targetIndex] = currentValue;
