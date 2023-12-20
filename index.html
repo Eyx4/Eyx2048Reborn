@@ -46,11 +46,17 @@
       font-size: 24px;
       margin-bottom: 10px;
     }
+
+    #high-score {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
   <h1>Eyx4's 64 Tile Game</h1>
   <div id="score">Score: 0</div>
+  <div id="high-score">High Score: 0</div>
   <div id="game-board"></div>
   <div id="buttons-container">
     <button onclick="move('up')">Up</button>
@@ -62,6 +68,8 @@
 
   <script>
     const tiles = Array(16).fill(0);
+    let score = 0;
+    let highScore = 0;
 
     function calculateTileSize(width, height) {
       const tileSize = Math.min(width / 4, height / 4);
@@ -81,6 +89,10 @@
           board.appendChild(tile);
         }
       }
+
+      // Update the score and high score
+      document.getElementById('score').textContent = `Score: ${score}`;
+      document.getElementById('high-score').textContent = `High Score: ${highScore}`;
     }
 
     function getRandomEmptyCell() {
@@ -106,6 +118,12 @@
       if (startValue === targetValue && startValue !== 0) {
         tiles[targetIndex] *= 2;
         tiles[startIndex] = 0;
+        // Update the score
+        score += tiles[targetIndex];
+        // Update the high score if needed
+        if (score > highScore) {
+          highScore = score;
+        }
       }
     }
 
@@ -167,15 +185,21 @@
 
     function checkAndHandleGameOver() {
       if (isGameOver()) {
-        alert("Game Over!");
-        // You might want to reset the game or do something else here
+        alert(`Game Over! Your score: ${score}`);
+        // Reset the game
+        resetGame();
       }
     }
 
     function resetGame() {
+      // Reset the tiles array
       tiles.fill(0);
+      // Reset the score
+      score = 0;
+      // Add two initial random tiles
       addRandomTile();
       addRandomTile();
+      // Render the board
       renderBoard();
     }
 
