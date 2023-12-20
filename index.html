@@ -14,19 +14,19 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 10px;
-      width: 100px; /* Adjust the width as needed */
-      height: 100px; /* Fixed height to ensure a square grid */
+      width: 800px; /* Adjust the width as needed */
+      height: 800px; /* Fixed height to ensure a square grid */
       margin: 0 auto;
     }
 
     .tile {
       width: 100%;
-      padding-bottom: 90%; /* Adjust the padding as needed */
+      padding-bottom: calc(100% - 20px); /* Adjust the padding as needed */
       border: 2px solid #333;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px; /* Adjust the font size as needed */
+      font-size: calc(20px - 6 * var(--tile-size)); /* Adjust the font size as needed */
       font-weight: bold;
     }
 
@@ -49,6 +49,11 @@
     document.addEventListener('DOMContentLoaded', function () {
       const board = document.getElementById('game-board');
       let tiles = Array(16).fill(0);
+
+      function calculateTileSize(width, height) {
+        const tileSize = Math.min(width / 4, height / 4);
+        document.documentElement.style.setProperty('--tile-size', `${tileSize}px`);
+      }
 
       function renderBoard() {
         board.innerHTML = '';
@@ -154,6 +159,9 @@
           // You might want to reset the game or do something else here
         }
       }
+
+      // Calculate tile size based on the initial dimensions
+      calculateTileSize(800, 800);
 
       // Add two initial random tiles
       addRandomTile();
