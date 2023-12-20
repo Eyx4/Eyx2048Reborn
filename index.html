@@ -78,7 +78,7 @@
     const tiles = Array(16).fill(0);
 
     function calculateTileSize(width, height) {
-      const tileSize = Math.min(width / 4, height / 4) - 10; /* Adjust the margin */
+      const tileSize = Math.min(width / 2, height / 2) - 10; /* Adjust the margin */
       document.documentElement.style.setProperty('--tile-size', `${tileSize}px`);
     }
 
