@@ -29,6 +29,7 @@
       justify-content: center;
       font-size: var(--font-size);
       font-weight: bold;
+      background-color: #eee; /* Tile background color */
     }
 
     button {
@@ -36,17 +37,26 @@
       margin: 5px;
       padding: 10px;
     }
+
+    #buttons-container {
+      margin-top: 20px;
+    }
+
+    #score {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
   <h1>Eyx4's 2048 Tile Game</h1>
+  <div id="score">Score: 0</div>
   <div id="game-board"></div>
   <div id="buttons-container">
     <button onclick="move('up')">Up</button>
     <button onclick="move('down')">Down</button>
     <button onclick="move('left')">Left</button>
     <button onclick="move('right')">Right</button>
-    <!-- Add this reset button -->
     <button onclick="resetGame()">Reset Game</button>
   </div>
 
