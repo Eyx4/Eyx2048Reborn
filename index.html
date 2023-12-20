@@ -41,10 +41,10 @@
   <h1>Eyx4's 2048 Tile Game</h1>
   <div id="game-board"></div>
   <div id="buttons-container">
-    <button data-direction="up">Up</button>
-    <button data-direction="down">Down</button>
-    <button data-direction="left">Left</button>
-    <button data-direction="right">Right</button>
+    <button id="up-button">Up</button>
+    <button id="down-button">Down</button>
+    <button id="left-button">Left</button>
+    <button id="right-button">Right</button>
   </div>
 
   <script>
@@ -165,12 +165,17 @@
       renderBoard();
 
       // Set up event listeners for the buttons
-      const buttonsContainer = document.getElementById('buttons-container');
-      buttonsContainer.addEventListener('click', function (event) {
-        const direction = event.target.dataset.direction;
-        if (direction) {
-          move(direction);
-        }
+      document.getElementById('up-button').addEventListener('click', function () {
+        move('up');
+      });
+      document.getElementById('down-button').addEventListener('click', function () {
+        move('down');
+      });
+      document.getElementById('left-button').addEventListener('click', function () {
+        move('left');
+      });
+      document.getElementById('right-button').addEventListener('click', function () {
+        move('right');
       });
     });
   </script>
