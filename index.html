@@ -22,13 +22,19 @@
 
     .tile {
       width: 100%;
-      height: 100%;
+      padding-bottom: 100%; /* Maintain aspect ratio for a square */
       border: 2px solid #333;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 24px;
       font-weight: bold;
+    }
+
+    button {
+      font-size: 16px;
+      margin: 5px;
+      padding: 10px;
     }
   </style>
 </head>
@@ -113,6 +119,41 @@
 
         addRandomTile();
         renderBoard();
+        checkAndHandleGameOver();
+      }
+
+      function isGameOver() {
+        // Check if there are any empty cells or adjacent cells with the same value
+        for (let i = 0; i < 16; i++) {
+          if (tiles[i] === 0) {
+            return false;
+          }
+          const row = Math.floor(i / 4);
+          const col = i % 4;
+          const currentValue = tiles[i];
+
+          // Check adjacent cells
+          const neighbors = [
+            [row - 1, col],
+            [row + 1, col],
+            [row, col - 1],
+            [row, col + 1]
+          ];
+
+          for (const [r, c] of neighbors) {
+            if (r >= 0 && r < 4 && c >= 0 && c < 4 && tiles[r * 4 + c] === currentValue) {
+              return false;
+            }
+          }
+        }
+        return true;
+      }
+
+      function checkAndHandleGameOver() {
+        if (isGameOver()) {
+          alert("Game Over!");
+          // You might want to reset the game or do something else here
+        }
       }
 
       // Add two initial random tiles
