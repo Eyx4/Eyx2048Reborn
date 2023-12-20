@@ -39,10 +39,28 @@
       transform: translate(-50%, -50%);
     }
 
+    .tile.rotate-2 {
+      transform: rotate(90deg);
+    }
+
+    .tile.rotate-4 {
+      transform: rotate(180deg);
+    }
+
+    .tile.rotate-8 {
+      transform: rotate(270deg);
+    }
+
+    .tile.rotate-16 {
+      transform: rotate(360deg);
+    }
+
     button {
       font-size: 16px;
       margin: 5px;
       padding: 10px;
+      position: relative;
+      z-index: 1;
     }
   </style>
 </head>
@@ -74,6 +92,9 @@
           tile.className = 'tile';
           const value = tiles[currentIndex] !== 0 ? tiles[currentIndex] : '';
           tile.innerHTML = `<span>${value}</span>`;
+          if (value !== '') {
+            tile.classList.add(`rotate-${value}`);
+          }
           board.appendChild(tile);
         }
       }
@@ -113,13 +134,15 @@
 
           if (currentValue !== 0) {
             let nextCol = direction === 'right' ? col + 1 : col - 1;
+            let targetCol = col;
 
             while (direction === 'right' ? nextCol < 4 : nextCol >= 0 && tiles[row * 4 + nextCol] === 0) {
+              targetCol = nextCol;
               nextCol += direction === 'right' ? 1 : -1;
             }
 
-            if (nextCol >= 0 && nextCol < 4) {
-              const targetIndex = row * 4 + nextCol;
+            if (targetCol !== col) {
+              const targetIndex = row * 4 + targetCol;
 
               if (tiles[targetIndex] === 0) {
                 tiles[targetIndex] = currentValue;
