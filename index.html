@@ -20,9 +20,9 @@
     }
 
     .tile {
-      width: 100%;
+      width: calc(25% - 20px); /* Adjust as needed */
       height: 0;
-      padding-bottom: 100%; /* Maintain a square aspect ratio */
+      padding-bottom: calc(25% - 20px); /* Adjust as needed */
       box-sizing: border-box;
       border: 2px solid #333;
       display: flex;
@@ -31,6 +31,7 @@
       font-size: var(--font-size);
       font-weight: bold;
       position: relative;
+      margin: 5px; /* Adjust as needed */
     }
 
     .tile > span {
@@ -59,10 +60,8 @@
     const tiles = Array(16).fill(0);
 
     function calculateTileSize(width, height) {
-      const tileSize = Math.min(width / 4, height / 4);
-      const fontSize = tileSize / 3;
+      const tileSize = Math.min(width / 4, height / 4) - 20; /* Adjust the margin */
       document.documentElement.style.setProperty('--tile-size', `${tileSize}px`);
-      document.documentElement.style.setProperty('--font-size', `${fontSize}px`);
     }
 
     function renderBoard() {
