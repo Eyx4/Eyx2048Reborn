@@ -134,20 +134,20 @@
     }
 
     function move(direction) {
-      for (let row = 0; row < 4; row++) {
-        for (let col = direction === 'right' ? 3 : 0; direction === 'right' ? col >= 0 : col < 4; direction === 'right' ? col-- : col++) {
+      for (let col = 0; col < 4; col++) {
+        for (let row = direction === 'down' ? 3 : 0; direction === 'down' ? row >= 0 : row < 4; direction === 'down' ? row-- : row++) {
           const currentIndex = row * 4 + col;
           const currentValue = tiles[currentIndex];
 
           if (currentValue !== 0) {
-            let nextCol = direction === 'right' ? col + 1 : col - 1;
+            let nextRow = direction === 'down' ? row + 1 : row - 1;
 
-            while (direction === 'right' ? nextCol < 4 : nextCol >= 0 && tiles[row * 4 + nextCol] === 0) {
-              nextCol += direction === 'right' ? 1 : -1;
+            while (direction === 'down' ? nextRow < 4 : nextRow >= 0 && tiles[nextRow * 4 + col] === 0) {
+              nextRow += direction === 'down' ? 1 : -1;
             }
 
-            if (nextCol >= 0 && nextCol < 4) {
-              const targetIndex = row * 4 + nextCol;
+            if (nextRow >= 0 && nextRow < 4) {
+              const targetIndex = nextRow * 4 + col;
 
               if (tiles[targetIndex] === 0) {
                 tiles[targetIndex] = currentValue;
